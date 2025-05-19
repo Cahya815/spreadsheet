@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Produk dari Google Sheets</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .produk { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Daftar Produk</h1>
+<div id="produk-container" class="produk"></div>
+
+<script>
+  function fetchSheetData(sheetId, sheetName = "Produk") {
+    const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
+    return fetch(url).then(res => res.json());
+  }
+
+  const sheetId = "2PACX-1vQBlwuYFd9wK-uybGzjcjc6bIf0RYLLvt1qpwKPHwpTW2BxfnmXU9RqmwyXkVG5sj9oKKDVOCI1xBuo";
+  const sheetName = "Produk"; // ganti sesuai nama tab di spreadsheet-mu
+
+  fetchSheetData(sheetId, sheetName).then(data => {
+    const container = document.getElementById("produk-container");
+    data.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${item.gambar}" alt="${item.nama}">
+        <h3>${item.nama}</h3>
+        <p>Rp ${Number(item.harga).toLocaleString()}</p>
+      `;
+      container.appendChild(card);
+    });
+  });
+</script>
+
+</body>
+</html>
