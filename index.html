@@ -24,11 +24,11 @@
 <div id="produk-container" class="produk"></div>
 
 <script>
-  function fetchSheetData(sheetId, sheetName = "Produk") {
+  function fetchSheetData(sheetId, sheetName = "Terlaris") {
     const url = `https://opensheet.elk.sh/${sheetId}/${sheetName}`;
     return fetch(url).then(res => res.json());
   }
-
+  
   const sheetId = "2PACX-1vQBlwuYFd9wK-uybGzjcjc6bIf0RYLLvt1qpwKPHwpTW2BxfnmXU9RqmwyXkVG5sj9oKKDVOCI1xBuo";
   const sheetName = "Produk"; // ganti sesuai nama tab di spreadsheet-mu
 
